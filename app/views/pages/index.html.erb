@@ -1,2 +1,3 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
+<% Scrobble.all.each do |s| %>
+  <%= s.user.email %> was reading <%= s.citation.bibtex[/\{\w+/][1..-1] unless s.citation.nil? %> <%= time_ago_in_words s.created_at %> ago <br />
+<% end %>

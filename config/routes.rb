@@ -6,6 +6,7 @@ Rsrchr::Application.routes.draw do
   get "pages/index"
 
   resources :citations
+  resources :pdfhashes
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

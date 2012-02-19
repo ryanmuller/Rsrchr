@@ -1,0 +1,22 @@
+<h1>Listing pdfhashes</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pdfhashes.each do |pdfhash| %>
+  <tr>
+    <td><%= pdfhash.hashkey %></td>
+    <td><%= link_to 'Show', pdfhash %></td>
+    <td><%= link_to 'Edit', edit_pdfhash_path(pdfhash) %></td>
+    <td><%= link_to 'Destroy', pdfhash, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pdfhash', new_pdfhash_path %>

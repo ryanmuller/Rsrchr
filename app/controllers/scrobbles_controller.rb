@@ -42,6 +42,13 @@ class ScrobblesController < ApplicationController
   def create
     @scrobble = Scrobble.new(params[:scrobble])
 
+    hashkey = @scrobble.hashkey
+
+    if @scrobble.citation.nil? and not hashkey.nil?
+      pdfhash = Pdfhash.find_by_hashkey(hashkey)
+      @scrobble.citation = pdfhash.citation unless pdfhash.nil?
+    end
+
     respond_to do |format|
       if @scrobble.save
         format.html { redirect_to @scrobble, notice: 'Scrobble was successfully created.' }
