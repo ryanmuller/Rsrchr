@@ -42,14 +42,13 @@ class CitationsController < ApplicationController
   def create
     @citation = Citation.new(params[:citation])
 
-    if params[:hashkey].nil?
-      crash
-    else
-      Pdfhash.create(:citation_id => @citation.id, :hashkey => params[:hashkey])
-    end
-
     respond_to do |format|
       if @citation.save
+
+        unless params[:hashkey].nil?
+          @citation.pdfhashes.create(:hashkey => params[:hashkey])
+        end
+
         format.html { redirect_to @citation, notice: 'Citation was successfully created.' }
         format.json { render json: @citation, status: :created, location: @citation }
       else
