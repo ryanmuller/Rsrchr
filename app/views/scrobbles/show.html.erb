@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @scrobble.user_id %>
+</p>
+
+<p>
+  <b>Citation:</b>
+  <%= @scrobble.citation_id %>
+</p>
+
+<p>
+  <b>Hash:</b>
+  <%= @scrobble.hash %>
+</p>
+
+
+<%= link_to 'Edit', edit_scrobble_path(@scrobble) %> |
+<%= link_to 'Back', scrobbles_path %>

@@ -1,0 +1,29 @@
+<%= form_for(@scrobble) do |f| %>
+  <% if @scrobble.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@scrobble.errors.count, "error") %> prohibited this scrobble from being saved:</h2>
+
+      <ul>
+      <% @scrobble.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :citation_id %><br />
+    <%= f.number_field :citation_id %>
+  </div>
+  <div class="field">
+    <%= f.label :hash %><br />
+    <%= f.text_field :hash %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

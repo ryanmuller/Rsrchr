@@ -1,0 +1,27 @@
+<h1>Listing scrobbles</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Citation</th>
+    <th>Hash</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @scrobbles.each do |scrobble| %>
+  <tr>
+    <td><%= scrobble.user_id %></td>
+    <td><%= scrobble.citation_id %></td>
+    <td><%= scrobble.hash %></td>
+    <td><%= link_to 'Show', scrobble %></td>
+    <td><%= link_to 'Edit', edit_scrobble_path(scrobble) %></td>
+    <td><%= link_to 'Destroy', scrobble, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Scrobble', new_scrobble_path %>
