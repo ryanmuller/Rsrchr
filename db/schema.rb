@@ -11,12 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120219035218) do
+ActiveRecord::Schema.define(:version => 20120220001217) do
 
   create_table "citations", :force => true do |t|
     t.string   "bibtex"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "pdf_url"
   end
 
   create_table "pdfhashes", :force => true do |t|
