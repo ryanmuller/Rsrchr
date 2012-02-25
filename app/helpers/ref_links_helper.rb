@@ -1,0 +1,2 @@
+module RefLinksHelper
+end

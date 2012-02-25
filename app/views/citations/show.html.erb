@@ -1,9 +1,15 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <b>Bibtex:</b>
   <%= @citation.bibtex %>
 </p>
+
+<h3>Notes and highlights about this reference</h3>
+<ul>
+  <% @citation.ref_links.each do |rl| %>
+    <li><%= link_to rl.user.email, rl.url %></li>
+  <% end %> 
+</ul>
 
 
 <%= link_to 'Edit', edit_citation_path(@citation) %> |

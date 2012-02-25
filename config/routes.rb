@@ -7,6 +7,7 @@ Rsrchr::Application.routes.draw do
 
   resources :citations
   resources :pdfhashes
+  resources :ref_links, :only => :create
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -57,7 +58,7 @@ Rsrchr::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'pages#index'
+  root :to => 'scrobbles#index'
 
   # See how all your routes lay out with "rake routes"
 
