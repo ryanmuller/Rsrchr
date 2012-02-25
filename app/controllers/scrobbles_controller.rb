@@ -1,5 +1,4 @@
 class ScrobblesController < ApplicationController
-  before_filter :identify_citation, :only => [:create]
 
   # GET /scrobbles
   # GET /scrobbles.json
@@ -43,7 +42,7 @@ class ScrobblesController < ApplicationController
   # POST /scrobbles.json
   def create
     @scrobble = Scrobble.new(params[:scrobble])
-    @scrobble.citation = @citation
+    @scrobble.citation ||= Citation.find_in_params(params)
 
     respond_to do |format|
       if @scrobble.save
@@ -84,22 +83,5 @@ class ScrobblesController < ApplicationController
     end
   end
 
-  protected
-
-  def identify_citation
-    @citation = nil
-
-    if not params[:hashkey].nil?
-      @citation = Pdfhash.find_by_hashkey(params[:hashkey]) 
-    end
-
-    if @citation.nil? and not params[:citekey].nil?
-      @citation = Citation.find_by_citekey(params[:citekey])
-    end
-
-    if @citation.nil? and not params[:doi].nil?
-      @citation = Citation.find_by_doi(params[:doi])
-    end
-  end
 end
 
