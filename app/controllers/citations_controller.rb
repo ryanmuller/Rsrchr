@@ -1,4 +1,5 @@
 class CitationsController < ApplicationController
+
   # GET /citations
   # GET /citations.json
   def index
@@ -40,6 +41,10 @@ class CitationsController < ApplicationController
   # POST /citations
   # POST /citations.json
   def create
+    if not params[:citekey].nil? and Citation.find_by_citekey(params[:citekey])
+      redirect_to root_path
+    end
+
     @citation = Citation.new(params[:citation])
 
     respond_to do |format|
