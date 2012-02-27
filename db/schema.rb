@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120225053422) do
+ActiveRecord::Schema.define(:version => 20120227225034) do
 
   create_table "citations", :force => true do |t|
     t.string   "bibtex"
@@ -44,6 +44,24 @@ ActiveRecord::Schema.define(:version => 20120225053422) do
     t.string   "hashkey"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "tag_id"
+    t.integer  "citation_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "taggings", ["citation_id"], :name => "index_taggings_on_citation_id"
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["user_id"], :name => "index_taggings_on_user_id"
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
