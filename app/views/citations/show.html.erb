@@ -4,6 +4,11 @@
   <%= @citation.bibtex %>
 </p>
 
+Tags: <%= render @citation.tags %>
+<%= form_for([@citation, Tag.new]) do |f| %>
+  <%= render :partial => 'tags/form', :locals => { :f => f } %>
+<% end %>
+
 <h3>Notes and highlights about this reference</h3>
 <ul>
   <% @citation.ref_links.each do |rl| %>

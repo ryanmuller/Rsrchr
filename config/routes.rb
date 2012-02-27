@@ -5,7 +5,12 @@ Rsrchr::Application.routes.draw do
 
   get "pages/index"
 
-  resources :citations
+  resources :tags, :only => :show
+
+  resources :citations do
+    resources :tags, :only => :create
+  end
+
   resources :pdfhashes
   resources :ref_links, :only => :create
 
