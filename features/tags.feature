@@ -10,6 +10,11 @@ Feature: Adding tags
     Then I should see "Tag created successfully."
     And I should see "cognition" within "#tags"
 
+  Scenario: Adding the same tag twice
+    When I add a tag called "cognition" within "#new_tag"
+    And I add a tag called "cognition" within "#new_tag"
+    Then I should not see "Tag created successfully."
+
   Scenario: Viewing citations for a tag
     When I add a tag called "cognition" within "#new_tag"
     And I am on the tag page for "cognition"
