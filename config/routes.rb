@@ -5,7 +5,7 @@ Rsrchr::Application.routes.draw do
 
   get "pages/index"
 
-  resources :tags, :only => :show
+  match '/tags/:name' => 'tags#show'
 
   resources :citations do
     resources :tags, :only => :create

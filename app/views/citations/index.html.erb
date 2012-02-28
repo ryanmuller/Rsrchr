@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Citekey</th>
     <th>Bibtex</th>
     <th></th>
     <th></th>
@@ -10,6 +11,7 @@
 
 <% @citations.each do |citation| %>
   <tr>
+    <td><%= citation.citekey %></td>
     <td><%= citation.bibtex %></td>
     <td><%= link_to 'Show', citation %></td>
     <td><%= link_to 'Edit', edit_citation_path(citation) %></td>
