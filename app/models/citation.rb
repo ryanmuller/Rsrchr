@@ -18,4 +18,19 @@ class Citation < ActiveRecord::Base
 
     return c1 || c2 || c3
   end
+
+  def self.create_from_bibtex(bibtex)
+    require 'bibtex'
+    bib = BibTeX.parse(bibtex).first
+    citekey = bib.key.to_s
+    citation = Citation.create(:bibtex => bibtex, :citekey => citekey)
+    bib.author.each do |author|
+      p author.to_s
+      a = Author.create(:name => author.to_s)
+      citation.authors << a
+    end
+    return citation
+  end
+                                
+
 end

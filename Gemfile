@@ -8,6 +8,7 @@ gem 'rails', '3.2.1'
 gem 'sqlite3'
 
 gem 'devise'
+gem 'bibtex-ruby'
 
 
 # Gems used only for assets and not required
