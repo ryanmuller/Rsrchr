@@ -11,6 +11,9 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /the citation index page/
+      citations_path
+
     when /the citation page for "([^\"]*)"/
       citation_path(Citation.find_by_citekey($1))
 

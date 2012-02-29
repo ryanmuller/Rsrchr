@@ -23,6 +23,6 @@ Feature: API
     
   Scenario: Submitting a wiki page
     Given there is a citation called "tversky1974judgment"
-    When I submit a link to "http://learnstream.org/ref:tversky1974judgment"
+    When I submit a link to "tversky1974judgment"
     And I am on the citation page for "tversky1974judgment"
     Then I should see "user" within "#ref_links"
