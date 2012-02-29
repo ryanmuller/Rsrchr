@@ -15,7 +15,6 @@ class CitationsController < ApplicationController
   # GET /citations/1.json
   def show
     @citation = Citation.find(params[:id])
-    @tag = Tag.new
 
     respond_to do |format|
       format.html # show.html.erb

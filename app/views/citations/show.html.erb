@@ -9,7 +9,11 @@
   <%= @citation.citekey %>
 </p>
 
-<div id="tags"> Tags: <%= render @citation.tags %></div>
+<div id="tags"> Tags: 
+<% @citation.tags.each do |tag| %>
+  <span class="tag"><%= link_to tag.name, "/tags/#{tag.name}" %> (<%= Tagging.where("citation_id = ? AND tag_id = ?", @citation.id, tag.id).count %>)</span>
+<% end %>
+</div>
 
 <%= form_for([@citation, Tag.new]) do |f| %>
   <%= render :partial => 'tags/form', :locals => { :f => f } %>

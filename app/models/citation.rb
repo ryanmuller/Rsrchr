@@ -3,7 +3,11 @@ class Citation < ActiveRecord::Base
   has_many :pdfhashes
   has_many :ref_links
   has_many :taggings
-  has_many :tags, :through => :taggings
+  has_many :tags, :uniq => true, :through => :taggings do
+    def push_with_attributes(tag, join_attrs)
+      Tagging.with_scope(:create => join_attrs) { self << tag }
+    end
+  end
 
   def self.find_in_params(params)
     c1 = Citation.find_by_doi(params[:doi]) unless params[:doi].nil?
