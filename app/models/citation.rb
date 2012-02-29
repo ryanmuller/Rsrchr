@@ -19,16 +19,36 @@ class Citation < ActiveRecord::Base
     return c1 || c2 || c3
   end
 
-  def self.create_from_bibtex(bibtex)
+  def self.create_from_bibtex(bibtex, submitter=nil)
+
     require 'bibtex'
     bib = BibTeX.parse(bibtex).first
     citekey = bib.key.to_s
-    citation = Citation.create(:bibtex => bibtex, :citekey => citekey)
+    doi = bib[:DOI]
+    submitter_id = submitter.nil? ? nil : submitter.id
+
+    citation = Citation.create(:bibtex => bibtex, 
+                               :citekey => citekey,
+                               :doi => doi,
+                               :submitter_id => submitter_id)
+
+    # add authors
     bib.author.each do |author|
-      p author.to_s
-      a = Author.create(:name => author.to_s)
+      author_name = author.to_s
+      a = Author.find_by_name(author_name) || Author.create(:name => author_name)
       citation.authors << a
     end
+
+    # add keywords as tags
+    if bib.has_field?(:keywords)
+      bib.keywords.to_s.split(";").each do |tag|
+        tag_name = tag.strip
+        next if tag_name.empty?
+        t = Tag.find_by_name(tag_name) || Tag.create(:name => tag_name)
+        citation.tags.push_with_attributes(t, :user => submitter)
+      end
+    end
+
     return citation
   end
                                 
