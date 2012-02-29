@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120227225034) do
+ActiveRecord::Schema.define(:version => 20120229053216) do
+
+  create_table "authors", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "url"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "authorships", :force => true do |t|
+    t.integer  "author_id"
+    t.integer  "citation_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "authorships", ["author_id"], :name => "index_authorships_on_author_id"
+  add_index "authorships", ["citation_id"], :name => "index_authorships_on_citation_id"
 
   create_table "citations", :force => true do |t|
     t.string   "bibtex"

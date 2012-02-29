@@ -8,6 +8,8 @@ class Citation < ActiveRecord::Base
       Tagging.with_scope(:create => join_attrs) { self << tag }
     end
   end
+  has_many :authorships
+  has_many :authors, :through => :authorships
 
   def self.find_in_params(params)
     c1 = Citation.find_by_doi(params[:doi]) unless params[:doi].nil?
