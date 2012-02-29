@@ -11,6 +11,9 @@ class Citation < ActiveRecord::Base
   has_many :authorships
   has_many :authors, :through => :authorships
 
+  validates :title, :presence => true
+  validates :citekey, :uniqueness => true
+
   def self.find_in_params(params)
     c1 = Citation.find_by_doi(params[:doi]) unless params[:doi].nil?
     c2 = Citation.find_by_citekey(params[:citekey]) unless params[:citekey].nil?
@@ -24,11 +27,13 @@ class Citation < ActiveRecord::Base
     require 'bibtex'
     bib = BibTeX.parse(bibtex).first
     citekey = bib.key.to_s
+    title = bib.title.to_s.gsub(/^{/, '').gsub(/}$/, '')
     doi = bib[:DOI]
     submitter_id = submitter.nil? ? nil : submitter.id
 
     citation = Citation.create(:bibtex => bibtex, 
                                :citekey => citekey,
+                               :title => title,
                                :doi => doi,
                                :submitter_id => submitter_id)
 

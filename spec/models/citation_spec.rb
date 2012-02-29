@@ -13,8 +13,9 @@ describe Citation do
     before(:each) do
       @a1 = "Kirschner, P.A."
       @citekey = "kirschner2006minimal"
+      @title = "Why minimal guidance during instruction does not work: An analysis of the failure of constructivist, discovery, problem-based, experiential, and inquiry-based teaching"
       @t1 = "discovery learning"
-      @bibtex = "@article{#{@citekey}, author = {#{@a1} and Sweller, J. and Clark, R.E.}, journal = {Educational psychologist}, keywords = {#{@t1}; constructivism}, number = {2}, pages = {75--86}, publisher = {Taylor \& Francis}, title = {Why minimal guidance during instruction does not work: An analysis of the failure of constructivist, discovery, problem-based, experiential, and inquiry-based teaching}, volume = {41}, year = {2006}}"
+      @bibtex = "@article{#{@citekey}, author = {#{@a1} and Sweller, J. and Clark, R.E.}, journal = {Educational psychologist}, keywords = {#{@t1}; constructivism}, number = {2}, pages = {75--86}, publisher = {Taylor \& Francis}, title = {#{@title}}, volume = {41}, year = {2006}}"
     end
 
     it "should be able to create a citation from bibtex" do
@@ -26,6 +27,11 @@ describe Citation do
     it "should have the right citekey" do
       @citation = Citation.create_from_bibtex(@bibtex)
       @citation.citekey.should == @citekey
+    end
+
+    it "should have the right title" do 
+      @citation = Citation.create_from_bibtex(@bibtex)
+      @citation.title.should == @title
     end
       
     it "should create a related author" do
