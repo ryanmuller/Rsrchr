@@ -1,6 +1,6 @@
 <h1>Scrobbles</h1>
 
 <% @scrobbles.each do |scrobble| %>
-  <%= scrobble.user.email %> was reading <%= link_to scrobble.citation.citekey, scrobble.citation unless scrobble.citation.nil? %> <%= time_ago_in_words scrobble.created_at %> ago <br />
+  <%= scrobble.user.name %> was reading <%= link_to scrobble.citation.citekey, scrobble.citation unless scrobble.citation.nil? %> <%= time_ago_in_words scrobble.created_at %> ago <br />
 <% end %>
 

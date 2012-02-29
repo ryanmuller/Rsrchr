@@ -30,7 +30,7 @@
 <h3>Notes and highlights about this reference</h3>
 <ul>
   <% @citation.ref_links.each do |rl| %>
-    <li><%= link_to rl.user.email, rl.url %></li>
+    <li><%= link_to rl.user.name, rl.url %></li>
   <% end %> 
 </ul>
 
