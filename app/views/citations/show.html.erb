@@ -1,4 +1,9 @@
-<h2><%= @citation.authors.each { |author| author.name } %></h2> 
+<p id="authors">
+<b>Authors:</b><br />
+  <% @citation.authors.each do |author| %>
+    <%= link_to author.name, author %><br />
+  <% end %>
+</p> 
 
 <p>
   <b>Bibtex:</b>

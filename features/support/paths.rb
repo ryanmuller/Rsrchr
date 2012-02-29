@@ -17,6 +17,8 @@ module NavigationHelpers
     when /the tag page for "([^\"]*)"/
       "/tags/#{$1}"
 
+    when /the author page for "([^\"]*)"/
+      author_path(Author.find_by_name($1))
 
     else
       begin

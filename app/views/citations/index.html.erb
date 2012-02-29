@@ -1,25 +1,9 @@
 <h1>Listing citations</h1>
 
-<table>
-  <tr>
-    <th>Citekey</th>
-    <th>Bibtex</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<ul>
 <% @citations.each do |citation| %>
-  <tr>
-    <td><%= citation.citekey %></td>
-    <td><%= citation.bibtex %></td>
-    <td><%= link_to 'Show', citation %></td>
-    <td><%= link_to 'Edit', edit_citation_path(citation) %></td>
-    <td><%= link_to 'Destroy', citation, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+  <li><%= link_to citation.citekey, citation %></li>
 <% end %>
-</table>
-
-<br />
+</ul>
 
 <%= link_to 'New Citation', new_citation_path %>

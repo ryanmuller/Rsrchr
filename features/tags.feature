@@ -1,5 +1,5 @@
-Feature: Adding tags
-  Users should be able to tag citations
+Feature: Tags
+  Users should be able to tag citations, see the tags for a citation, and see the citations for a tag
 
   Background:
     Given there are the following users:

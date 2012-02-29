@@ -45,21 +45,15 @@ class CitationsController < ApplicationController
       redirect_to root_path
     end
 
-    @citation = Citation.new(params[:citation])
+    @citation = Citation.create_from_bibtex(params[:bibtex])
+
+    unless params[:hashkey].nil?
+      @citation.pdfhashes.create(:hashkey => params[:hashkey])
+    end
 
     respond_to do |format|
-      if @citation.save
-
-        unless params[:hashkey].nil?
-          @citation.pdfhashes.create(:hashkey => params[:hashkey])
-        end
-
-        format.html { redirect_to @citation, notice: 'Citation was successfully created.' }
-        format.json { render json: @citation, status: :created, location: @citation }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @citation.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @citation }
+      format.json { render json: @citation, status: :created, location: @citation }
     end
   end
 
