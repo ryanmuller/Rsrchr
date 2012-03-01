@@ -94,6 +94,7 @@ GEM
     multi_json (1.1.0)
     nokogiri (1.5.0)
     orm_adapter (0.0.5)
+    pg (0.13.2)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.1)
@@ -178,6 +179,7 @@ DEPENDENCIES
   factory_girl
   jquery-rails
   launchy
+  pg
   rails (= 3.2.1)
   rspec-rails (~> 2.6)
   sass-rails (~> 3.2.3)
