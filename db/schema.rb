@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120301011706) do
+ActiveRecord::Schema.define(:version => 20120301042902) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(:version => 20120301011706) do
   add_index "authorships", ["citation_id"], :name => "index_authorships_on_citation_id"
 
   create_table "citations", :force => true do |t|
-    t.string   "bibtex"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "bibtex",     :limit => 255
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.string   "pdf_url"
     t.integer  "user_id"
     t.string   "citekey"
