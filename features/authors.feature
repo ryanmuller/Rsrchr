@@ -4,8 +4,8 @@ Feature: Authors
 
   Background:
     Given there are the following users:
-      | email             | password |
-      | user1@example.com | password |
+      | name | email             | password |
+      | user | user1@example.com | password |
     And I am signed in as "user1@example.com"
     And there is a citation called "tversky1974judgment"
     And "tversky1974judgment" has an author named "Tversky, Amos"

@@ -3,9 +3,9 @@ Feature: Tags
 
   Background:
     Given there are the following users:
-      | email             | password |
-      | user1@example.com | password |
-      | user2@example.com | password |
+      | name  | email             | password |
+      | user1 | user1@example.com | password |
+      | user2 | user2@example.com | password |
     And I am signed in as "user1@example.com"
     And there is a citation called "tversky1974judgment"
     And I am on the citation page for "tversky1974judgment"

@@ -4,5 +4,6 @@ FactoryGirl.define do
     citekey  "kirschner2006minimal"
     doi      "10.1207/s15326985ep4102_1"
     title    "Why minimal guidance during instruction does not work: An analysis of the failure of constructivist, discovery, problem-based, experiential, and inquiry-based teaching"
+    user
   end
 end

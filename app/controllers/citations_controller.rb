@@ -1,4 +1,5 @@
 class CitationsController < ApplicationController
+  before_filter :authenticate_user, :only => [:create]
 
   # GET /citations
   # GET /citations.json
@@ -45,7 +46,7 @@ class CitationsController < ApplicationController
       redirect_to root_path
     end
 
-    @citation = Citation.create_from_bibtex(params[:bibtex])
+    @citation = Citation.create_from_bibtex(params[:bibtex], @current_user)
 
     unless params[:hashkey].nil?
       @citation.pdfhashes.create(:hashkey => params[:hashkey])
@@ -83,5 +84,11 @@ class CitationsController < ApplicationController
       format.html { redirect_to citations_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  
+  def authenticate_user
+    @current_user = User.find_by_authentication_token(params[:token])
   end
 end

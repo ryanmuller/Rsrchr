@@ -1,16 +1,19 @@
 When /^I submit the citation "([^"]*)"$/ do |bibtex|
-  post "/citations", {"bibtex" => bibtex}, {"Content-type" => "application/json"}
+  token = User.first.authentication_token
+  post "/citations", {"bibtex" => bibtex, "token" => token}, {"Content-type" => "application/json"}
 end
 
 When /^I submit a scrobble for "([^"]*)"$/ do |citekey|
-  payload = { "scrobble" => { "user_id" => 1 },
-               "citekey" => citekey }
+  token = User.first.authentication_token
+  payload = { "token" => token,
+              "citekey" => citekey }
   post "/scrobbles", payload, {"Content-type" => "application/json"}
 end
 
 When /^I submit a link to "([^"]*)"$/ do |citekey|
-  payload = { "ref_link" => { "user_id" => 1,
-                              "url" => "http://learnstream.org/wiki/ref:" + citekey },
-              "citekey" => citekey }
+  token = User.first.authentication_token
+  payload = { "ref_link" => { "url" => "http://learnstream.org/wiki/ref:" + citekey },
+              "citekey" => citekey,
+              "token" => token }
   post "/ref_links", payload, {"Content-type" => "application/json"}
 end

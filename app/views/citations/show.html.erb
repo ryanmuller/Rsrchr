@@ -27,9 +27,9 @@
   <%= render :partial => 'tags/form', :locals => { :f => f } %>
 <% end %>
 
-<p id="ref_links">
+<p> 
 <b>Notes and highlights about this reference</b>
-<ul>
+<ul id="ref_links">
   <% @citation.ref_links.each do |rl| %>
     <li><%= link_to rl.user.name, rl.url %></li>
   <% end %> 

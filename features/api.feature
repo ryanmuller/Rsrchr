@@ -3,7 +3,7 @@ Feature: API
 
   Background:
     Given there are the following users:
-      | email             | name | password |
+      | email             | name | password | 
       | user1@example.com | user | password |
 
   Scenario: Submitting a citation

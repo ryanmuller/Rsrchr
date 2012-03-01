@@ -1,4 +1,5 @@
 class ScrobblesController < ApplicationController
+  before_filter :authenticate_user, :only => :create
 
   # GET /scrobbles
   # GET /scrobbles.json
@@ -43,6 +44,7 @@ class ScrobblesController < ApplicationController
   def create
     @scrobble = Scrobble.new(params[:scrobble])
     @scrobble.citation ||= Citation.find_in_params(params)
+    @scrobble.user = @current_user
 
     respond_to do |format|
       if @scrobble.save
@@ -83,5 +85,10 @@ class ScrobblesController < ApplicationController
     end
   end
 
+  private
+  
+  def authenticate_user
+    @current_user = User.find_by_authentication_token(params[:token])
+  end
 end
 

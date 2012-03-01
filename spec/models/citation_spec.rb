@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Citation do
 
   before(:each) do
-    #citation_attrs = FactoryGirl.attributes_for(:citation)
-    @user = Factory(:user)
+    @user = FactoryGirl.create(:user)
   end
 
 
@@ -20,22 +19,22 @@ describe Citation do
 
     it "should be able to create a citation from bibtex" do
       lambda do
-        @citation = Citation.create_from_bibtex(@bibtex)
+        @citation = Citation.create_from_bibtex(@bibtex, @user)
       end.should change(Citation, :count).by(1)
     end
 
     it "should have the right citekey" do
-      @citation = Citation.create_from_bibtex(@bibtex)
+      @citation = Citation.create_from_bibtex(@bibtex, @user)
       @citation.citekey.should == @citekey
     end
 
     it "should have the right title" do 
-      @citation = Citation.create_from_bibtex(@bibtex)
+      @citation = Citation.create_from_bibtex(@bibtex, @user)
       @citation.title.should == @title
     end
       
     it "should create a related author" do
-      @citation = Citation.create_from_bibtex(@bibtex)
+      @citation = Citation.create_from_bibtex(@bibtex, @user)
       author = Author.find_by_name(@a1)
       author.should_not be_nil
       @citation.authors.should include(author)
