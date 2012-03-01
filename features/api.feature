@@ -15,6 +15,7 @@ Feature: API
     And I should see "Tversky, A." within "#authors"
     And I should see "cognition" within "#tags"
 
+
   Scenario: Submitting a scrobble
     Given there is a citation called "tversky1974judgment"
     When I submit a scrobble for "tversky1974judgment"
@@ -26,3 +27,4 @@ Feature: API
     When I submit a link to "tversky1974judgment"
     And I am on the citation page for "tversky1974judgment"
     Then I should see "user" within "#ref_links"
+

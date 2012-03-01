@@ -13,7 +13,7 @@ class RefLinksController < ApplicationController
         format.html { redirect_to @citation, notice: 'Reference link was successfully created.' }
         format.json { render json: @ref_link, status: :created, location: @citation }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to @citation, error: 'Could not create reference link.' }
         format.json { render json: @ref_link.errors, status: :unprocessable_entity }
       end
     end
