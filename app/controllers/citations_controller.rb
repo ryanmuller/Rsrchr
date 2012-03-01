@@ -42,9 +42,6 @@ class CitationsController < ApplicationController
   # POST /citations
   # POST /citations.json
   def create
-    if not params[:citekey].nil? and Citation.find_by_citekey(params[:citekey])
-      redirect_to root_path
-    end
 
     @citation = Citation.create_from_bibtex(params[:bibtex], @current_user)
 
