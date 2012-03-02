@@ -3,7 +3,8 @@ Rsrchr::Application.routes.draw do
 
   devise_for :users
 
-  match '/auth/mendeley/callback', to: 'users/omniauth_callbacks#mendeley'
+  #match '/auth/mendeley/callback', to: 'users/omniauth_callbacks#mendeley'
+  match '/auth/:provider' => 'users/omniauth_callbacks#blank'
 
   get "pages/index"
 

@@ -5,5 +5,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     current_user.save
     redirect_to root, notice: "Connected to Mendeley"
   end
+
+  def blank
+    render :text => "Not found", :status => 404
+  end
 end
 
