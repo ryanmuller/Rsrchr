@@ -8,7 +8,7 @@ gem 'rails', '3.2.1'
 gem 'sqlite3', :group => [ :test, :development ]
 gem 'pg', :group => :production
 
-gem 'devise'
+gem 'devise', '~> 1.5'
 gem 'bibtex-ruby'
 gem 'omniauth'
 gem 'omniauth-mendeley'
