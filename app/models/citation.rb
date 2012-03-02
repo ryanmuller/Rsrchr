@@ -58,6 +58,38 @@ class Citation < ActiveRecord::Base
 
     return citation
   end
+
+  def date
+    require 'bibtex'
+    bib = BibTeX.parse(bibtex).first
+    bib[:year] || 'n.d.'
+  end
+
+
+  def pretty_author_names
+    if authors.count > 2
+      "#{authors.first.name.split(',')[0]}, et al."
+    elsif authors.count == 2
+      "#{authors.first.name.split(',')[0]} & #{authors[1].name.split(',')[0]}"
+    else
+      authors.first.name.split(',')[0]
+    end
+  end
+
+  def to_s
+    count = 80
+    if title.length >= count 
+      shortened = title[0, count]
+      splitted = shortened.split(/\s/)
+      words = splitted.length
+      short_title = splitted[0, words-1].join(" ") + ' ...'
+    else 
+      short_title = title
+    end
+
+
+    "#{short_title} (#{pretty_author_names}, #{date})" 
+  end
                                 
   def citekey_url
     "/ref:#{citekey}"
