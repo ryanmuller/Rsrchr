@@ -9,7 +9,7 @@ gem 'sqlite3', :group => [ :test, :development ]
 gem 'pg', :group => :production
 
 gem 'devise', '~> 1.5'
-gem 'oa-oauth', :require => 'omniauth/oauth'
+gem 'omniauth'
 gem 'omniauth-mendeley'
 gem 'bibtex-ruby'
 
