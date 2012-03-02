@@ -3,7 +3,7 @@
 
 Your API token is <%= current_user.authentication_token %>
 
-<%= link_to "Connect to Mendeley", user_omniauth_authorize_path(:mendeley) %>
+<%= link_to "Connect to Mendeley", '/auth/mendeley' %>
 
 
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
