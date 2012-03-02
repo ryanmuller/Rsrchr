@@ -8,10 +8,10 @@ gem 'rails', '3.2.1'
 gem 'sqlite3', :group => [ :test, :development ]
 gem 'pg', :group => :production
 
-gem 'devise', '~> 2.0.4'
-gem 'bibtex-ruby'
-gem 'omniauth'
+gem 'devise', '~> 1.5'
+gem 'oa-oauth', :require => 'omniauth/oauth'
 gem 'omniauth-mendeley'
+gem 'bibtex-ruby'
 
 
 # Gems used only for assets and not required

@@ -1,10 +1,16 @@
 Rsrchr::Application.routes.draw do
   resources :scrobbles
 
-  devise_for :users
+  devise_for :users, :controllers => {
+    :omniauth_callbacks => "users/omniauth_callbacks"
+  }
 
   #match '/auth/mendeley/callback', to: 'users/omniauth_callbacks#mendeley'
-  match '/auth/:provider' => 'users/omniauth_callbacks#blank'
+  #match '/auth/:provider' => 'users/omniauth_callbacks#blank'
+  
+  devise_scope :user do
+    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+  end
 
   get "pages/index"
 
