@@ -74,6 +74,7 @@ GEM
     ffi (1.0.9)
     gherkin (2.5.2)
       json (>= 1.4.6)
+    hashie (1.2.0)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.1)
@@ -93,6 +94,15 @@ GEM
     mime-types (1.17.2)
     multi_json (1.1.0)
     nokogiri (1.5.0)
+    oauth (0.4.5)
+    omniauth (1.0.2)
+      hashie (~> 1.2)
+      rack
+    omniauth-mendeley (0.2)
+      omniauth-oauth (~> 1.0.0)
+    omniauth-oauth (1.0.0)
+      oauth
+      omniauth (~> 1.0)
     orm_adapter (0.0.5)
     pg (0.13.2)
     polyglot (0.3.3)
@@ -179,6 +189,8 @@ DEPENDENCIES
   factory_girl
   jquery-rails
   launchy
+  omniauth
+  omniauth-mendeley
   pg
   rails (= 3.2.1)
   rspec-rails (~> 2.6)

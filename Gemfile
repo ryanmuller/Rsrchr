@@ -10,6 +10,8 @@ gem 'pg', :group => :production
 
 gem 'devise'
 gem 'bibtex-ruby'
+gem 'omniauth'
+gem 'omniauth-mendeley'
 
 
 # Gems used only for assets and not required
