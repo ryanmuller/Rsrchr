@@ -1,7 +1,7 @@
 Rsrchr::Application.routes.draw do
   resources :scrobbles
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users
 
   match '/auth/mendeley/callback', to: 'users/omniauth_callbacks#mendeley'
 
