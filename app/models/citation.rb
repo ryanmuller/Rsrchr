@@ -59,5 +59,8 @@ class Citation < ActiveRecord::Base
     return citation
   end
                                 
+  def citekey_url
+    "/ref:#{citekey}"
+  end
 
 end

@@ -6,6 +6,7 @@ Rsrchr::Application.routes.draw do
   get "pages/index"
 
   match '/tags/:name' => 'tags#show'
+  match '/ref::citekey' => 'citations#show'
 
   resources :citations do
     resources :tags, :only => :create

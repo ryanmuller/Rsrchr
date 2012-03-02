@@ -15,7 +15,11 @@ class CitationsController < ApplicationController
   # GET /citations/1
   # GET /citations/1.json
   def show
-    @citation = Citation.find(params[:id])
+    if params[:citekey]
+      @citation = Citation.find_by_citekey(params[:citekey])
+    else
+      @citation = Citation.find(params[:id])
+    end
 
     respond_to do |format|
       format.html # show.html.erb
