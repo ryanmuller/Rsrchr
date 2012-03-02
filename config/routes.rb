@@ -3,6 +3,8 @@ Rsrchr::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
+  match '/auth/mendeley/callback', to: 'users/omniauth_callbacks#mendeley'
+
   get "pages/index"
 
   match '/tags/:name' => 'tags#show'
