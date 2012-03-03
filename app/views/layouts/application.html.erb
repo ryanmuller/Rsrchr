@@ -7,14 +7,38 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if user_signed_in? %>
-    <%= current_user.name %> <%= link_to 'Account', edit_user_registration_path %> <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
-  <% else %>
-    <%= link_to 'Login', new_user_session_path %> or <%= link_to 'Sign up', new_user_registration_path %>
-  <% end %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p> 
-<%= yield %>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">Scrobblr</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            
+          <% if user_signed_in? %>
+            <li><%= link_to 'Account', edit_user_registration_path %></li>
+            <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+            <li><%= link_to 'Login', new_user_session_path %></li>
+            <li><%= link_to 'Sign up', new_user_registration_path %></li>
+          <% end %>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p> 
+      </div>
+    </div>
+    <div class="row">
+      <div class="span12"><%= yield %></div>
+    </div>
+  </div>
 
 </body>
 </html>
