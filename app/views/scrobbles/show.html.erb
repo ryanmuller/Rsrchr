@@ -1,20 +1,22 @@
-<p id="notice"><%= notice %></p>
+<h1>Scrobble</h1>
 
 <p>
-  <b>User:</b>
+  <b>User</b><br>
   <%= @scrobble.user_id %>
 </p>
 
 <p>
-  <b>Citation:</b>
+  <b>Citation</b><br>
   <%= @scrobble.citation_id %>
 </p>
 
 <p>
-  <b>Hash:</b>
-  <%= @scrobble.hash %>
+  <b>Hashkey</b><br>
+  <%= @scrobble.hashkey %>
 </p>
 
-
-<%= link_to 'Edit', edit_scrobble_path(@scrobble) %> |
-<%= link_to 'Back', scrobbles_path %>
+<div class="form-actions">
+  <%= link_to 'Back', scrobbles_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_scrobble_path(@scrobble), :class => 'btn' %>
+  <%= link_to 'Delete', scrobble_path(@scrobble), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

@@ -1,21 +1,52 @@
-<%= form_for(@citation) do |f| %>
-  <% if @citation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@citation.errors.count, "error") %> prohibited this citation from being saved:</h2>
+<%= form_for @citation, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Citation</legend>
 
-      <ul>
-      <% @citation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="control-group">
+      <%= f.label :bibtex, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :bibtex, :class => 'text_area' %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :bibtex %><br />
-    <%= f.text_field :bibtex %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="control-group">
+      <%= f.label :pdf_url, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :pdf_url, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :user_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :user_id, :class => 'number_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :citekey, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :citekey, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :doi, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :doi, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :title, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :title, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', citations_path, :class => 'btn' %>
+    </div>
+  </fieldset>
 <% end %>

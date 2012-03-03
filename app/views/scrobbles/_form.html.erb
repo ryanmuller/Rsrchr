@@ -1,29 +1,31 @@
-<%= form_for(@scrobble) do |f| %>
-  <% if @scrobble.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@scrobble.errors.count, "error") %> prohibited this scrobble from being saved:</h2>
+<%= form_for @scrobble, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Scrobble</legend>
 
-      <ul>
-      <% @scrobble.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="control-group">
+      <%= f.label :user_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :user_id, :class => 'number_field' %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :citation_id %><br />
-    <%= f.number_field :citation_id %>
-  </div>
-  <div class="field">
-    <%= f.label :hash %><br />
-    <%= f.text_field :hash %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="control-group">
+      <%= f.label :citation_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.number_field :citation_id, :class => 'number_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :hashkey, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :hashkey, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', scrobbles_path, :class => 'btn' %>
+    </div>
+  </fieldset>
 <% end %>

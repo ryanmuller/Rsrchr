@@ -1,9 +1,26 @@
-<h1>Listing citations</h1>
+<h1>Citations</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Bibtex</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @citations.each do |citation| %>
+      <tr>
+        <td><%= citation.id %></td>
+        <td><%= link_to citation.bibtex, citation_path(citation) %></td>
+        <td><%= citation.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_citation_path(citation), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', citation_path(citation), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<ul>
-<% @citations.each do |citation| %>
-  <li><%= link_to citation.citekey, citation %></li>
-<% end %>
-</ul>
-
-<%= link_to 'New Citation', new_citation_path %>
+<%= link_to 'New', new_citation_path, :class => 'btn btn-primary' %>
