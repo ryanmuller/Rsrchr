@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
       'oauth_nonce' => nonce,
       'oauth_signature_method' => 'HMAC-SHA1',
       'oauth_timestamp' => Time.now.to_i.to_s,
-      'oauth_version' => '1.0'
+      'oauth_version' => '1.0',
       'oauth_signature' => signature
     }
 

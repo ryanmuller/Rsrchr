@@ -7,6 +7,7 @@ Rsrchr::Application.routes.draw do
 
   #match '/auth/mendeley/callback', to: 'users/omniauth_callbacks#mendeley'
   #match '/auth/:provider' => 'users/omniauth_callbacks#blank'
+  match '/mendeley/library' => 'mendeley#library'
   
   devise_scope :user do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
