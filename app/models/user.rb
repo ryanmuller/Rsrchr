@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
 
     params = {
       'oauth_consumer_key' => ENV['MENDELEY_KEY'],
+      'oauth_token' => mendeley_token
       'oauth_nonce' => nonce,
       'oauth_signature_method' => 'HMAC-SHA1',
       'oauth_timestamp' => Time.now.to_i.to_s,

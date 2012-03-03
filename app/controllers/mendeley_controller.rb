@@ -4,7 +4,7 @@ class MendeleyController < ApplicationController
     require 'net/http'
     require 'uri'
 
-    url = 'http://api.mendeley.com/oapi/library/';
+    url = 'http://api.mendeley.com/oapi/library/'
 
     parsed_url = URI.parse( url )
 
