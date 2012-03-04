@@ -3,7 +3,11 @@
 
 <p>Your API token is <%= current_user.authentication_token %></p>
 
-<p><%= link_to "Connect to Mendeley", '/users/auth/mendeley' %></p>
+<p><% if current_user.mendeley_token.nil? %>
+  <%= link_to "Connect to Mendeley", '/users/auth/mendeley' %>
+<% else %>
+  You are connected to Mendeley. 
+<% end %></p>
 
 
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
