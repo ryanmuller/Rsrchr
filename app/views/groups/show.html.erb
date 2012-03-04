@@ -1,0 +1,22 @@
+<h1>Group</h1>
+
+<p>
+  <b>Name</b><br>
+  <%= @group.name %>
+</p>
+
+<p>
+  <b>Description</b><br>
+  <%= @group.description %>
+</p>
+
+<p>
+  <b>Public</b><br>
+  <%= @group.public %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', groups_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_group_path(@group), :class => 'btn' %>
+  <%= link_to 'Delete', group_path(@group), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>
