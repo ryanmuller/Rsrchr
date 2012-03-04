@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  has_many :citations
+  has_many :user_citations
+  has_many :citations, :through => :user_citations
   has_many :scrobbles
   has_many :ref_links
 

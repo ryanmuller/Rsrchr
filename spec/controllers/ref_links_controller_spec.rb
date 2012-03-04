@@ -4,7 +4,7 @@ describe RefLinksController do
 
   before(:each) do
     @user = FactoryGirl.create(:user)
-    @citation = FactoryGirl.create(:citation, :user => @user)
+    @citation = FactoryGirl.create(:citation)
     @url = "http://localhost/ref:#{@citation.citekey}"
   end
 

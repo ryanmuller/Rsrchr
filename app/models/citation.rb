@@ -10,12 +10,11 @@ class Citation < ActiveRecord::Base
   end
   has_many :authorships
   has_many :authors, :through => :authorships
-
-  belongs_to :user
+  has_many :user_citations
+  has_many :users, :through => :user_citations
 
   validates :title, :presence => true
   validates :citekey, :uniqueness => true
-  validates :user_id, :presence => true
 
   def self.find_in_params(params)
     c1 = Citation.find_by_doi(params[:doi]) unless params[:doi].nil?
@@ -26,6 +25,7 @@ class Citation < ActiveRecord::Base
   end
 
   def self.create_from_bibtex(bibtex, submitter)
+    return if submitter.nil?
 
     require 'bibtex'
     bib = BibTeX.parse(bibtex).first
@@ -33,28 +33,35 @@ class Citation < ActiveRecord::Base
     title = bib.title.to_s.gsub(/^{/, '').gsub(/}$/, '')
     doi = bib[:DOI]
 
-    citation = Citation.create(:bibtex => bibtex, 
-                               :citekey => citekey,
-                               :title => title,
-                               :doi => doi,
-                               :user_id => submitter.id)
+    c1 = Citation.find_by_doi(doi)
+    c2 = Citation.find_by_citekey(citekey)
+    citation = c1 || c2
 
-    # add authors
-    bib.author.each do |author|
-      author_name = author.to_s
-      a = Author.find_by_name(author_name) || Author.create(:name => author_name)
-      citation.authors << a
-    end
+    if citation.nil?
+      citation = Citation.create(:bibtex => bibtex, 
+                                 :citekey => citekey,
+                                 :title => title,
+                                 :doi => doi)
 
-    # add keywords as tags
-    if bib.has_field?(:keywords)
-      bib.keywords.to_s.split(";").each do |tag|
-        tag_name = tag.strip
-        next if tag_name.empty?
-        t = Tag.find_by_name(tag_name) || Tag.create(:name => tag_name)
-        citation.tags.push_with_attributes(t, :user => submitter)
+      # add authors
+      bib.author.each do |author|
+        author_name = author.to_s
+        a = Author.find_by_name(author_name) || Author.create(:name => author_name)
+        citation.authors << a
+      end
+
+      # add keywords as tags
+      if bib.has_field?(:keywords)
+        bib.keywords.to_s.split(";").each do |tag|
+          tag_name = tag.strip
+          next if tag_name.empty?
+          t = Tag.find_by_name(tag_name) || Tag.create(:name => tag_name)
+          citation.tags.push_with_attributes(t, :user => submitter)
+        end
       end
     end
+
+    submitter.citations << citation
 
     return citation
   end

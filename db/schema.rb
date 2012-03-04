@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120302054549) do
+ActiveRecord::Schema.define(:version => 20120304024546) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(:version => 20120302054549) do
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
     t.string   "pdf_url"
-    t.integer  "user_id"
     t.string   "citekey"
     t.string   "doi"
     t.string   "title"
@@ -82,6 +81,16 @@ ActiveRecord::Schema.define(:version => 20120302054549) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "user_citations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "citation_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "user_citations", ["citation_id"], :name => "index_user_citations_on_citation_id"
+  add_index "user_citations", ["user_id"], :name => "index_user_citations_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false

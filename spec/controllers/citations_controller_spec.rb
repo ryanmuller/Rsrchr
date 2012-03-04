@@ -9,6 +9,7 @@ describe CitationsController do
     @title = "Why minimal guidance during instruction does not work: An analysis of the failure of constructivist, discovery, problem-based, experiential, and inquiry-based teaching"
     @t1 = "discovery learning"
     @bibtex = "@article{#{@citekey}, author = {#{@a1} and Sweller, J. and Clark, R.E.}, journal = {Educational psychologist}, keywords = {#{@t1}; constructivism}, number = {2}, pages = {75--86}, publisher = {Taylor \& Francis}, title = {#{@title}}, volume = {41}, year = {2006}}"
+    @user2 = FactoryGirl.create(:user, :name => "user2", :email => "user2@example.com")
   end
 
   describe "POST 'create'" do
@@ -24,6 +25,16 @@ describe CitationsController do
         post :create, :bibtex => @bibtex, :token => @user.authentication_token
       end.should change(Citation, :count).by(0)
     end
+
+    it "should add a citation to a library when submitted by a second user" do
+      post :create, :bibtex => @bibtex, :token => @user.authentication_token
+      lambda do
+        post :create, :bibtex => @bibtex, :token => @user2.authentication_token
+      end.should change(Citation, :count).by(0)
+
+      @user2.citations.should include(Citation.first)
+    end
+
   end
 end
 

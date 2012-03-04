@@ -4,7 +4,7 @@ describe ScrobblesController do
 
   before(:each) do
     @user = FactoryGirl.create(:user)
-    @citation = FactoryGirl.create(:citation, :user => @user)
+    @citation = FactoryGirl.create(:citation)
     @pdfhash = FactoryGirl.create(:pdfhash, :citation => @citation)
     @params = { :user_id => @user.id }
   end
