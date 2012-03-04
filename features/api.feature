@@ -17,10 +17,10 @@ Feature: API
 
 
   Scenario: Submitting a scrobble
-    Given there is a citation called "tversky1974judgment"
+    Given there is a citation called "tversky1974judgment" with title "Judgment Under Uncertainty"
     When I submit a scrobble for "tversky1974judgment"
     And I am on the homepage
-    Then I should see "tversky1974judgment"
+    Then I should see "Judgment Under Uncertainty"
     
   Scenario: Submitting a wiki page
     Given there is a citation called "tversky1974judgment"

@@ -7,7 +7,7 @@ Feature: Tags
       | user1 | user1@example.com | password |
       | user2 | user2@example.com | password |
     And I am signed in as "user1@example.com"
-    And there is a citation called "tversky1974judgment"
+    And there is a citation called "tversky1974judgment" with title "Judgment Under Uncertainty"
     And I am on the citation page for "tversky1974judgment"
 
   Scenario: Adding a tag to a citation
@@ -31,5 +31,5 @@ Feature: Tags
   Scenario: Viewing citations for a tag
     When I add a tag called "cognition" within "#new_tag"
     And I am on the tag page for "cognition"
-    Then I should see "tversky1974judgment"
+    Then I should see "Judgment Under Uncertainty"
   

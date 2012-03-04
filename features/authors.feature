@@ -7,7 +7,7 @@ Feature: Authors
       | name | email             | password |
       | user | user1@example.com | password |
     And I am signed in as "user1@example.com"
-    And there is a citation called "tversky1974judgment"
+    And there is a citation called "tversky1974judgment" with title "Judgment Under Uncertainty"
     And "tversky1974judgment" has an author named "Tversky, Amos"
     And "tversky1974judgment" has an author named "Kahneman, Daniel"
 
@@ -18,6 +18,6 @@ Feature: Authors
 
   Scenario: Viewing the author page
     When I am on the author page for "Tversky, Amos"
-    Then I should see "tversky1974judgment" within "#bibliography"
+    Then I should see "Judgment Under Uncertainty" within "#bibliography"
     
 

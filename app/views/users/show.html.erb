@@ -1,9 +1,14 @@
 <h1><%= @user.name %></h1>
 
+<div id="scrobbles">
 <h2>Recently read</h2>
 
 <%= render @user.scrobbles %>
+</div>
 
+<div id="library">
 <h2>Library</h2>
 
 <%= render @user.citations %>
+</div>
+

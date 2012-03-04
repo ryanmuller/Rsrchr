@@ -1,5 +1,9 @@
-Given /^there is a citation called "([^\"]*)"$/ do |citekey|
-  @citation = FactoryGirl.create(:citation, :citekey => citekey)
+Given /^there is a citation called "([^\"]*)"( with title "[^\"]*")?$/ do |citekey, title|
+  if title.nil?
+    @citation = FactoryGirl.create(:citation, :citekey => citekey)
+  else
+    @citation = FactoryGirl.create(:citation, :citekey => citekey, :title => title)
+  end
 end
 
 Given /^"([^\"]*)" has an author named "([^\"]*)"$/ do |citekey, author_name|
