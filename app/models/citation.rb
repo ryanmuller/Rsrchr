@@ -33,8 +33,8 @@ class Citation < ActiveRecord::Base
     title = bib.title.to_s.gsub(/^{/, '').gsub(/}$/, '')
     doi = bib[:DOI]
 
-    c1 = Citation.find_by_doi(doi)
-    c2 = Citation.find_by_citekey(citekey)
+    c1 = Citation.find_by_doi(doi) unless doi.nil?
+    c2 = Citation.find_by_citekey(citekey) unless citekey.nil?
     citation = c1 || c2
 
     if citation.nil?

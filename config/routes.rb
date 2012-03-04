@@ -26,6 +26,7 @@ Rsrchr::Application.routes.draw do
   resources :ref_links, :only => :create
 
   resources :authors, :only => :show
+  resources :users, :only => :show
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
