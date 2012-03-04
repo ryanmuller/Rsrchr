@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304024546) do
+ActiveRecord::Schema.define(:version => 20120304212458) do
 
   create_table "authors", :force => true do |t|
     t.string   "name"
@@ -41,12 +41,43 @@ ActiveRecord::Schema.define(:version => 20120304024546) do
     t.string   "title"
   end
 
+  create_table "groups", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "public",      :default => true
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
+  add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
+
   create_table "pdfhashes", :force => true do |t|
     t.integer  "citation_id"
     t.string   "hashkey"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "postings", :force => true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.integer  "citation_id"
+    t.text     "context"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "postings", ["citation_id"], :name => "index_postings_on_citation_id"
+  add_index "postings", ["group_id"], :name => "index_postings_on_group_id"
+  add_index "postings", ["user_id"], :name => "index_postings_on_user_id"
 
   create_table "ref_links", :force => true do |t|
     t.string   "url"
