@@ -24,9 +24,13 @@ class User < ActiveRecord::Base
   def join!(group)
     group.users << self
   end
+  
+  def leave!(group)
+    memberships.find_by_group_id(group).destroy
+  end
 
   def member?(group)
-    group.users.include?(self)
+    memberships.find_by_group_id(group)
   end
 
   def percent_encode(string)

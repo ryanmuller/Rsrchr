@@ -17,15 +17,24 @@ describe User do
       end
     end
 
+    describe "leave! function" do
+
+      it "should remove a user from a group" do
+        @user.join!(@group)
+        @user.leave!(@group)
+        @user.should_not be_member(@group)
+      end
+    end
+
     describe "member? function" do
 
-      it "should return false when a user has not joined a group" do
-        @user.member?(@group).should == false
+      it "should be nil when a user has not joined a group" do
+        @user.member?(@group).should == nil
       end
 
-      it "should return true when a user is in a group" do
+      it "should return a membership when a user is in a group" do
         @user.join!(@group)
-        @user.member?(@group).should == true
+        @user.member?(@group).should_not == nil
       end
     end
   end

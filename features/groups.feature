@@ -15,12 +15,12 @@ Feature: Groups
   Scenario: Joining a group
     When I am on the group index page
     And I follow "Vikings"
-    And I follow "Join group"
+    And I press "Join"
     Then I should see "You are a member of this group"
 
   Scenario: Making a posting
     When I am on the group page for "Vikings"
-    And I follow "Join group"
+    And I press "Join"
     And I submit the posting "Hi everyone"
     Then I should see "Hi everyone" within "#postings"
 
