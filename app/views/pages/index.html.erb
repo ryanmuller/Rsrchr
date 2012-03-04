@@ -1,36 +1,42 @@
 
 <div class="row">
   <div class="span8">
-    <h1>Recent Activity</h1>
+    <h2>Recent Activity</h2>
     <%= render @scrobbles %>
   </div>
   <div class="span4">
-    <h1>Your library</h1>
-    <h4>Recently added</h4>
-    <ul id="recently-added-citations">
-    <% @citations.each do |c| %>
-      <li>
-      <%= c %><br />
-      <%= link_to "Citation page", c %>
-      <% if rl = c.ref_links.find_by_user_id(current_user.id) %>
-        <br /><%= link_to "Your link", rl.url %>
+    <% if current_user %>
+      <h1>Your library</h1>
+      <h4>Recently added</h4>
+      <ul id="recently-added-citations">
+      <% @citations.each do |c| %>
+        <li>
+        <%= c %><br />
+        <%= link_to "Citation page", c %>
+        <% if rl = c.ref_links.find_by_user_id(current_user.id) %>
+          <br /><%= link_to "Your link", rl.url %>
+        <% end %>
+        </li>
       <% end %>
-      </li>
-    <% end %>
-    </ul>
+      </ul>
 
-    <h4>Recently read</h4>
-    <ul id="recently-read-citation">
-    <% @citations_read.each do |c| %>
-      <li>
-      <%= c %><br />
-      <%= link_to "Citation page", c %>
-      <% if rl = c.ref_links.find_by_user_id(current_user.id) %>
-        <br /><%= link_to "Your link", rl.url %>
+      <h4>Recently read</h4>
+      <ul id="recently-read-citation">
+      <% @citations_read.each do |c| %>
+        <li>
+        <%= c %><br />
+        <%= link_to "Citation page", c %>
+        <% if rl = c.ref_links.find_by_user_id(current_user.id) %>
+          <br /><%= link_to "Your link", rl.url %>
+        <% end %>
+        </li>
       <% end %>
-      </li>
+      </ul>
+    <% else %>
+      <h3><%= link_to 'Sign up', new_user_registration_path %> to store your references, keep track of what you're reading, and more!</h3>  (Already have an account? <%= link_to 'Login', new_user_session_path %>)
     <% end %>
-    </ul>
+
+
   </div>
 </div>
 
