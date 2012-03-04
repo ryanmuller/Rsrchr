@@ -1,22 +1,18 @@
-<h1>Group</h1>
+<h1><%= @group.name %></h1>
 
 <p>
-  <b>Name</b><br>
-  <%= @group.name %>
-</p>
+<% if current_user.member?(@group) %>
+  You are a member of this group.
+<% else %>
+  <%= link_to "Join now", "#" %>
+<% end %>
 
-<p>
-  <b>Description</b><br>
-  <%= @group.description %>
-</p>
+<p><%= @group.description %></p>
 
-<p>
-  <b>Public</b><br>
-  <%= @group.public %>
-</p>
+<ul id="postings">
+  <% @group.postings.each do |p| %>
+    <li><%= p.user.name %>: <%= p.content %></li>
+  <% end %>
+</ul>
 
-<div class="form-actions">
-  <%= link_to 'Back', groups_path, :class => 'btn'  %>
-  <%= link_to 'Edit', edit_group_path(@group), :class => 'btn' %>
-  <%= link_to 'Delete', group_path(@group), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
-</div>
+

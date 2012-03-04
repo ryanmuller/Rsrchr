@@ -21,6 +21,14 @@ class User < ActiveRecord::Base
 
   validates :name, :presence => true
 
+  def join!(group)
+    group.users << self
+  end
+
+  def member?(group)
+    group.users.include?(self)
+  end
+
   def percent_encode(string)
     require 'uri'
     URI.escape( string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]") ).gsub('*', '%2A')
