@@ -1,23 +1,40 @@
-<h1><%= @group.name %></h1>
+<div class="row">
+  <div class="span3">
+    <h1><%= @group.name %></h1>
 
-<p>
-<% if current_user %>
-  <% if current_user.member?(@group) %>
-    You are a member of this group.
-  <% else %>
-    <%= form_for current_user.memberships.build(:group_id => @group.id) do |f| %>
-      <%= f.hidden_field :group_id %>
-      <%= f.submit "Join", :class => 'btn btn-primary' %>
+    <p><%= @group.description %></p>
+
+    <p>
+    <% if current_user %>
+      <% if current_user.member?(@group) %>
+        You are a member of this group.
+      <% else %>
+        <%= form_for current_user.memberships.build(:group_id => @group.id) do |f| %>
+          <%= f.hidden_field :group_id %>
+          <%= f.submit "Join", :class => 'btn btn-primary' %>
+        <% end %>
+      <% end %>
     <% end %>
-  <% end %>
-<% end %>
+    </p>
 
-<p><%= @group.description %></p>
+    <h3>Members</h3>
+    <ul id="members">
+      <% @group.users.each do |u| %>
+        <li><%= link_to u.name, u %></li>
+      <% end %>
+    </ul>
+  </div>
 
-<ul id="postings">
-  <% @group.postings.each do |p| %>
-    <li><%= p.user.name %>: <%= p.content %></li>
-  <% end %>
-</ul>
+  <div class="span9">
+
+    <ul id="postings">
+      <% @group.postings.each do |p| %>
+        <li><%= p.user.name %>: <%= p.content %></li>
+      <% end %>
+    </ul>
+    <% if @group.postings.empty? %>
+      No activity in this group. Why don't you start something?
+    <% end %>
+  </div>
 
 
