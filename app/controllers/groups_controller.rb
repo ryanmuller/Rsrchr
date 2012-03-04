@@ -46,6 +46,6 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @group.destroy
 
-    redirect_to groups_url }
+    redirect_to groups_url
   end
 end
