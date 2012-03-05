@@ -5,10 +5,7 @@
     <p><%= @group.description %></p>
 
     <p>
-    <% if current_user %>
-      <% if current_user.member?(@group) %>
-        You are a member of this group.
-      <% else %>
+    <% if current_user and if not current_user.member?(@group) %>
         <%= form_for current_user.memberships.build(:group_id => @group.id) do |f| %>
           <%= f.hidden_field :group_id %>
           <%= f.submit "Join", :class => 'btn btn-primary' %>
@@ -18,9 +15,14 @@
     </p>
 
     <h3>Members</h3>
+    <% if current_user.member?(@group) %>
+      You are a member of this group.
+    <% end %>
     <ul id="members">
       <% @group.users.each do |u| %>
-        <li><%= link_to u.name, u %></li>
+        <% if u != current_user %>
+          <li><%= link_to u.name, u %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>
