@@ -27,7 +27,9 @@ Rsrchr::Application.routes.draw do
 
   resources :authors, :only => :show
   resources :users, :only => :show
-  resources :groups
+  resources :groups do
+    resources :postings, :only => :create
+  end
   resources :memberships, :only => [:create, :destroy]
 
   # The priority is based upon order of creation:

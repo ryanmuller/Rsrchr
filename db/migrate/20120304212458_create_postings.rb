@@ -4,7 +4,7 @@ class CreatePostings < ActiveRecord::Migration
       t.references :group
       t.references :user
       t.references :citation
-      t.text :context
+      t.text :content
 
       t.timestamps
     end

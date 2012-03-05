@@ -3,7 +3,7 @@ Given /^there is a group called "([^"]*)"$/ do |name|
 end
 
 When /^I submit the posting "([^"]*)"$/ do |content|
-  step "I fill in \"content\" with \"#{content}\""
+  step "I fill in \"posting_content\" with \"#{content}\""
   step "I press \"Post\""
 end
 

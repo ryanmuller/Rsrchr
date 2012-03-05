@@ -27,13 +27,25 @@
 
   <div class="span9">
 
-    <ul id="postings">
-      <% @group.postings.each do |p| %>
-        <li><%= p.user.name %>: <%= p.content %></li>
+    <% if current_user.member?(@group) %>
+    <div>
+      <ul id="postings">
+        <% @group.postings.each do |p| %>
+          <li><%= p.user.name %>: <%= p.content %></li>
+        <% end %>
+      </ul>
+      <% if @group.postings.empty? %>
+        <p>No activity in this group. Why don't you start something?</p>
       <% end %>
-    </ul>
-    <% if @group.postings.empty? %>
-      No activity in this group. Why don't you start something?
+    </div>
+
+    <br /><br />
+      <%= form_for [@group, @group.postings.build] do |f| %>
+        <%= f.text_area :content, :class => 'input-xlarge', :rows => 3 %>
+        <%= f.submit "Post", :class => 'btn btn-primary' %>
+      <% end %>
+    <% else %>
+      <p>Join this group to see what's going on.</p>
     <% end %>
   </div>
 
