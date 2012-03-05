@@ -27,8 +27,7 @@
 
   <div class="span9">
 
-    <div id="postings">
-    <% if current_user.member?(@group) %>
+    <% if current_user and current_user.member?(@group) %>
       <% @group.postings.each do |p| %>
         <p>
           <%= p.content %><br />
@@ -41,38 +40,40 @@
           <hr>
         </p>
       <% end %>
+
       <% if @group.postings.empty? %>
         <p>No activity in this group. Why don't you start something?</p>
       <% end %>
+
+      <div class="row">
+        <div class="span3">
+          <h3>Post a citation</h3>
+          <br />
+          <%= form_for [@group, @group.postings.build], :html => { :class => 'form-horizontal' } do |f| %>
+            <fieldset>
+              <%= f.hidden_field :citation_id %>
+              <div class="control-group">
+                <label class="control-label" for="citation_title">Citation</label>
+                <div class="controls">
+                  <%= autocomplete_field_tag 'citation_title', '', autocomplete_citation_title_citations_path, :id_element => '#posting_citation_id' %>
+                </div>
+              </div>
+              <div class="control-group">
+                <%= f.label :content, "Comment", :class => "control-label" %>
+                <div class="controls">
+                  <%= f.text_area :content, :class => 'input-xlarge', :rows => 3 %>
+                </div>
+              </div>
+              <div class="form-actions">
+                <%= f.submit "Post", :class => 'btn btn-primary' %>
+              </div>
+          <% end %>
+        </div>
+      </div>
     <% else %>
       <p>Join this group to see what's going on.</p>
     <% end %>
     </div>
 
-    <div class="row">
-      <div class="span3">
-        <h3>Post a citation</h3>
-        <br />
-        <%= form_for [@group, @group.postings.build], :html => { :class => 'form-horizontal' } do |f| %>
-          <fieldset>
-            <%= f.hidden_field :citation_id %>
-            <div class="control-group">
-              <label class="control-label" for="citation_title">Citation</label>
-              <div class="controls">
-                <%= autocomplete_field_tag 'citation_title', '', autocomplete_citation_title_citations_path, :id_element => '#posting_citation_id' %>
-              </div>
-            </div>
-            <div class="control-group">
-              <%= f.label :content, "Comment", :class => "control-label" %>
-              <div class="controls">
-                <%= f.text_area :content, :class => 'input-xlarge', :rows => 3 %>
-              </div>
-            </div>
-            <div class="form-actions">
-              <%= f.submit "Post", :class => 'btn btn-primary' %>
-            </div>
-        <% end %>
-      </div>
-    </div>
   </div>
 
