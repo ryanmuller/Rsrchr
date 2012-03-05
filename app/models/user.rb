@@ -1,4 +1,13 @@
 class User < ActiveRecord::Base
+
+  has_many :user_citations
+  has_many :citations, :through => :user_citations
+  has_many :scrobbles
+  has_many :ref_links
+  has_many :memberships
+  has_many :groups, :through => :memberships
+  has_many :postings
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,10 +21,17 @@ class User < ActiveRecord::Base
 
   validates :name, :presence => true
 
-  has_many :user_citations
-  has_many :citations, :through => :user_citations
-  has_many :scrobbles
-  has_many :ref_links
+  def join!(group)
+    group.users << self
+  end
+  
+  def leave!(group)
+    memberships.find_by_group_id(group).destroy
+  end
+
+  def member?(group)
+    memberships.find_by_group_id(group)
+  end
 
   def percent_encode(string)
     require 'uri'

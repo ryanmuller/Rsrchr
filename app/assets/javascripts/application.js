@@ -6,5 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require twitter/bootstrap
+//= require autocomplete-rails
 //= require_tree .

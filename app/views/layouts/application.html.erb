@@ -3,6 +3,7 @@
 <head>
   <title>Rsrchr</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/ui-lightness/jquery-ui.css" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -14,6 +15,7 @@
         <div class="nav-collapse">
           <ul class="nav">
             
+          <li><%= link_to 'Groups', groups_path %></li>
           <% if user_signed_in? %>
             <li><%= link_to 'Account', edit_user_registration_path %></li>
             <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>

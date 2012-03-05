@@ -20,6 +20,7 @@ Rsrchr::Application.routes.draw do
 
   resources :citations do
     resources :tags, :only => :create
+    get :autocomplete_citation_title, :on => :collection
   end
 
   resources :pdfhashes
@@ -27,6 +28,10 @@ Rsrchr::Application.routes.draw do
 
   resources :authors, :only => :show
   resources :users, :only => :show
+  resources :groups do
+    resources :postings, :only => :create
+  end
+  resources :memberships, :only => [:create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

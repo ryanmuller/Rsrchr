@@ -1,6 +1,9 @@
 class CitationsController < ApplicationController
   before_filter :authenticate_user, :only => [:create]
 
+  autocomplete :citation, :title, :full => true
+  
+
   # GET /citations
   # GET /citations.json
   def index

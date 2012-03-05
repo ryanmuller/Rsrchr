@@ -26,6 +26,12 @@ module NavigationHelpers
     when /the user page for "([^\"]*)"/
       user_path(User.find_by_name($1))
 
+    when /the group index page/
+      groups_path
+
+    when /the group page for "([^\"]*)"/
+      group_path(Group.find_by_name($1))
+
     else
       begin
         page_name =~ /the (.*) page/
