@@ -2,6 +2,7 @@
   <p class="citation-text"><%= link_to citation, citation %></p>
   <div class="citation-links">
     <%= render :partial => 'citations/add_to_library', :locals => { :citation => citation } %>
+    <%= render :partial => 'citations/share_to_group', :locals => { :citation => citation } %>
   </div>
   
 </div>

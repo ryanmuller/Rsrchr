@@ -1,0 +1,41 @@
+
+
+<div class="share-toggle btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    Share to group
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <% current_user.groups.each do |g| %>
+      <li><%= link_to g.name, '#', 'data-group-id' => g.id  %></li>
+    <% end %>
+  </ul>
+</div>
+
+<% current_user.groups.each do |g| %>
+  <div class="well hide share">
+  <%= form_for [g, g.postings.build], :html => { :id => "new_posting_for_#{g.id}", :class => 'form-horizontal' } do |f| %>
+    <fieldset>
+      <legend>Post a citation to <%= g.name %></legend>
+      <%= f.hidden_field :citation_id, :value => citation.id %>
+      <br />
+      <div class="control-group">
+        <label class="control-label" for="citation_title">Citation</label>
+        <div class="controls">
+          <%= citation.title %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :content, "Comment", :class => "control-label" %>
+        <div class="controls">
+          <%= f.text_area :content, :class => 'input-xlarge', :rows => 3 %>
+        </div>
+      </div>
+      <div class="form-actions">
+        <%= f.submit "Post", :class => 'btn btn-primary' %>
+        <a href="#" class="btn cancel">Cancel</a>
+      </div>
+  <% end %>
+  </div>
+<% end %>
+

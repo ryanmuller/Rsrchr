@@ -16,7 +16,10 @@
       <%= render :partial => 'tags/form', :locals => { :f => f } %>
     <% end %>
     </p>
-    <%= render :partial => 'citations/add_to_library', :locals => { :citation => @citation } %>
+    <div class="citation-buttons">
+      <%= render :partial => 'citations/add_to_library', :locals => { :citation => @citation } %>
+      <%= render :partial => 'citations/share_to_group', :locals => { :citation => @citation} unless @citation.nil? %>
+    </div>
   </div>
   <div class="span7">
     <h3>Notes and highlights about this reference</h3>

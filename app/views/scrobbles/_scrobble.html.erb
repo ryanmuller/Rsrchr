@@ -2,5 +2,8 @@
 <%= link_to scrobble.citation, scrobble.citation.citekey_url unless scrobble.citation.nil? %> 
 <%= time_ago_in_words scrobble.created_at %> ago <br />
 </p>
-<p><%= render :partial => 'citations/add_to_library', :locals => { :citation => scrobble.citation} unless scrobble.citation.nil? %>
+<div class="citation-buttons">
+<%= render :partial => 'citations/add_to_library', :locals => { :citation => scrobble.citation} unless scrobble.citation.nil? %>
+<%= render :partial => 'citations/share_to_group', :locals => { :citation => scrobble.citation} unless scrobble.citation.nil? %>
+</div>
 <hr>

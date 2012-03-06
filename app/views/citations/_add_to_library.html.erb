@@ -1,9 +1,11 @@
-<% if current_user and not current_user.citations.find_by_id(citation) %>
-  <%= form_for current_user.user_citations.build(:citation_id => citation.id) do |f| %>
-    <%= f.hidden_field :citation_id %>
-    <%= f.submit "Add to library", :class => 'btn' %>
+<div class="add-library">
+  <% if current_user and not current_user.citations.find_by_id(citation) %>
+    <%= form_for current_user.user_citations.build(:citation_id => citation.id) do |f| %>
+      <%= f.hidden_field :citation_id %>
+      <%= f.submit "Add to library", :class => 'btn' %>
+    <% end %>
+  <% else %>
+    <div class="plain-text"><i class="icon-ok-sign"></i> In your library</div>
   <% end %>
-<% else %>
-  <i class="icon-ok-sign"></i> In your library
-<% end %>
+</div>
   
