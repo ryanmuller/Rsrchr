@@ -1,41 +1,43 @@
-<h1><%= @citation.title %></h1>
+<div class="row">
+  <div class="span5">
+    <div class="well">
+      <h2><%= @citation.title %></h2>
+      <p id="authors">
+      <b>Authors:</b><br />
+        <% @citation.authors.each do |author| %>
+          <%= link_to author.name, author %><br />
+        <% end %>
+      </p> 
 
-<p id="authors">
-<b>Authors:</b><br />
-  <% @citation.authors.each do |author| %>
-    <%= link_to author.name, author %><br />
-  <% end %>
-</p> 
+      <p id="tags"><b>Tags:</b> 
+      <% @citation.tags.each do |tag| %>
+        <span class="tag"><%= link_to tag.name, "/tags/#{tag.name}" %> (<%= Tagging.where("citation_id = ? AND tag_id = ?", @citation.id, tag.id).count %>)</span>
+      <% end %>
+      <%= form_for [@citation, Tag.new], :html => { :class => 'form-inline' } do |f| %>
+        <%= render :partial => 'tags/form', :locals => { :f => f } %>
+      <% end %>
+      </p>
+    </div>
+    <%= render :partial => 'citations/add_to_library', :locals => { :citation => @citation } %>
+  </div>
+  <div class="span7">
+    <h3>Notes and highlights about this reference</h3>
+    <ul id="ref_links">
+      <% @citation.ref_links.each do |rl| %>
+        <li><%= link_to rl.user.name, rl.url %></li>
+      <% end %> 
+    </ul>
+    <% if @citation.ref_links.empty? %><p>None</p><% end %>
 
-<p id="bibtex">
-  <b>Bibtex:</b>
-  <%= @citation.bibtex %>
-</p>
+    <h3>Other info</h3>
+    <p id="bibtex">
+      <b>Bibtex:</b>
+      <%= @citation.bibtex %>
+    </p>
 
-<p id="citekey">
-  <b>Citekey:</b>
-  <%= @citation.citekey %>
-</p>
-
-<div id="tags"> Tags: 
-<% @citation.tags.each do |tag| %>
-  <span class="tag"><%= link_to tag.name, "/tags/#{tag.name}" %> (<%= Tagging.where("citation_id = ? AND tag_id = ?", @citation.id, tag.id).count %>)</span>
-<% end %>
+    <p id="citekey">
+      <b>Citekey:</b>
+      <%= @citation.citekey %>
+    </p>
+  </div>
 </div>
-
-<%= form_for([@citation, Tag.new]) do |f| %>
-  <%= render :partial => 'tags/form', :locals => { :f => f } %>
-<% end %>
-
-<p> 
-<b>Notes and highlights about this reference</b>
-<ul id="ref_links">
-  <% @citation.ref_links.each do |rl| %>
-    <li><%= link_to rl.user.name, rl.url %></li>
-  <% end %> 
-</ul>
-</p>
-
-
-<%= link_to 'Edit', edit_citation_path(@citation) %> |
-<%= link_to 'Back', citations_path %>
