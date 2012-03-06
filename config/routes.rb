@@ -32,6 +32,7 @@ Rsrchr::Application.routes.draw do
     resources :postings, :only => :create
   end
   resources :memberships, :only => [:create, :destroy]
+  resources :user_citations, :only => [:create, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

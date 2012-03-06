@@ -1,5 +1,9 @@
 <div class="citation">
-  <p class="citation-text"><%= citation %></p>
-  <%= link_to 'Citation page', citation %>
+  <p class="citation-text"><%= link_to citation, citation %></p>
+  <div class="citation-links">
+    <% if current_user and not current_user.citations.find_by_id(citation) %>
+      <%= render :partial => 'citations/add_to_library', :locals => { :citation => citation } %>
+    <% end %>
+  </div>
   
 </div>

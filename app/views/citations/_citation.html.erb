@@ -1,1 +1,12 @@
-<li><%= link_to citation, citation.citekey_url %></li>
+<li>
+<%= citation %>
+<div class="citation-links">
+  <%= link_to "Citation page", citation.citekey_url %>
+  <% if rl = citation.ref_links.find_by_user_id(current_user.id) %>
+    <%= link_to "Your link", rl.url %>
+  <% end %>
+  <% unless current_user.has_citation?(citation) %>
+    <%= link_to "Add to library", '#' %>
+  <% end %>
+</div>
+</li>

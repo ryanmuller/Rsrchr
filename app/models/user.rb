@@ -33,6 +33,18 @@ class User < ActiveRecord::Base
     memberships.find_by_group_id(group)
   end
 
+  def add_citation!(citation)
+    citation.users << self
+  end
+
+  def remove_citation!(citation)
+    user_citations.find_by_citation_id(citation).destroy
+  end
+
+  def has_citation?(citation)
+    user_citations.find_by_citation_id(citation)
+  end
+
   def percent_encode(string)
     require 'uri'
     URI.escape( string, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]") ).gsub('*', '%2A')
