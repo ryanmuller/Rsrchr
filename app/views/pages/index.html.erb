@@ -17,13 +17,7 @@
       <h4>Recently read</h4>
       <ul id="recently-read-citation">
       <% @citations_read.each do |c| %>
-        <li>
-        <%= c %><br />
-        <%= link_to "Citation page", c %>
-        <% if rl = c.ref_links.find_by_user_id(current_user.id) %>
-          <br /><%= link_to "Your link", rl.url %>
-        <% end %>
-        </li>
+        <%= render c %>
       <% end %>
       </ul>
     <% else %>

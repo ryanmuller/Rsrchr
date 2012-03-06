@@ -12,7 +12,9 @@
         <% end %>
       <% end %>
     <% end %>
+
     </p>
+    <hr>
 
     <h3>Members</h3>
     <% if current_user.member?(@group) %>
@@ -48,12 +50,13 @@
       <% end %>
 
       <div class="row">
-        <div class="span3">
-          <h3>Post a citation</h3>
-          <br />
+        <div class="span7">
+          <div class="well">
           <%= form_for [@group, @group.postings.build], :html => { :class => 'form-horizontal' } do |f| %>
             <fieldset>
+              <legend>Post a citation</legend>
               <%= f.hidden_field :citation_id %>
+              <br />
               <div class="control-group">
                 <label class="control-label" for="citation_title">Citation</label>
                 <div class="controls">
@@ -70,6 +73,7 @@
                 <%= f.submit "Post", :class => 'btn btn-primary' %>
               </div>
           <% end %>
+          </div>
         </div>
       </div>
     <% else %>

@@ -1,23 +1,21 @@
 <div class="row">
   <div class="span5">
-    <div class="well">
-      <h2><%= @citation.title %></h2>
-      <p id="authors">
-      <b>Authors:</b><br />
-        <% @citation.authors.each do |author| %>
-          <%= link_to author.name, author %><br />
-        <% end %>
-      </p> 
+    <h2><%= @citation.title %></h2>
+    <h3 id="authors">
+      <% @citation.authors.each_with_index do |author, i| %>
+        <%= link_to author.name, author %><%= "," if i < @citation.authors.count - 1 %>
+      <% end %>
+    </h3> 
+    <hr>
 
-      <p id="tags"><b>Tags:</b> 
-      <% @citation.tags.each do |tag| %>
-        <span class="tag"><%= link_to tag.name, "/tags/#{tag.name}" %> (<%= Tagging.where("citation_id = ? AND tag_id = ?", @citation.id, tag.id).count %>)</span>
-      <% end %>
-      <%= form_for [@citation, Tag.new], :html => { :class => 'form-inline' } do |f| %>
-        <%= render :partial => 'tags/form', :locals => { :f => f } %>
-      <% end %>
-      </p>
-    </div>
+    <p id="tags"><b>Tags:</b> 
+    <% @citation.tags.each do |tag| %>
+      <span class="tag"><%= link_to tag.name, "/tags/#{tag.name}" %> (<%= Tagging.where("citation_id = ? AND tag_id = ?", @citation.id, tag.id).count %>)</span>
+    <% end %>
+    <%= form_for [@citation, Tag.new], :html => { :class => 'form-inline' } do |f| %>
+      <%= render :partial => 'tags/form', :locals => { :f => f } %>
+    <% end %>
+    </p>
     <%= render :partial => 'citations/add_to_library', :locals => { :citation => @citation } %>
   </div>
   <div class="span7">

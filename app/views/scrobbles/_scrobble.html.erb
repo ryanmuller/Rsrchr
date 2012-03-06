@@ -1,1 +1,6 @@
-<%= link_to scrobble.user.name, scrobble.user %> was reading <%= link_to scrobble.citation, scrobble.citation.citekey_url unless scrobble.citation.nil? %> <%= time_ago_in_words scrobble.created_at %> ago <br />
+<p><%= link_to scrobble.user.name, scrobble.user %> was reading 
+<%= link_to scrobble.citation, scrobble.citation.citekey_url unless scrobble.citation.nil? %> 
+<%= time_ago_in_words scrobble.created_at %> ago <br />
+</p>
+<p><%= render :partial => 'citations/add_to_library', :locals => { :citation => scrobble.citation} unless scrobble.citation.nil? %>
+<hr>
