@@ -1,7 +1,17 @@
 
-<h2>API</h2>
+<h2>API and other services</h2>
+
+<h3>API</h3>
 
 <p>Your API token is <%= current_user.authentication_token %></p>
+
+<h3>Google Scholar bookmarklet</h3>
+
+<p>Drag the following link to your bookmark toolbar. When you are on a list of results from Google Scholar, select text from the desired result and the press the bookmark.</p>
+
+<p><a href="javascript:(function(e,a,g,h,f,c,b,d)%7Bif(!(f=e.jQuery)%7C%7Cg%3Ef.fn.jquery%7C%7Ch(f))%7Bc=a.createElement(%22script%22);c.type=%22text/javascript%22;c.src=%22http://ajax.googleapis.com/ajax/libs/jquery/%22+g+%22/jquery.min.js%22;c.onload=c.onreadystatechange=function()%7Bif(!b&&(!(d=this.readyState)%7C%7Cd==%22loaded%22%7C%7Cd==%22complete%22))%7Bh((f=e.jQuery).noConflict(1),b=1);f(c).remove()%7D%7D;a.documentElement.childNodes%5B0%5D.appendChild(c)%7D%7D)(window,document,%221.5%22,function($,L)%7Bvar%20selected_el=$(window.getSelection().getRangeAt(0).startContainer.parentElement);var%20cit_el=$(selected_el.parents(%22.gs_r%22)%5B0%5D);var%20pdf_url=cit_el.find('.gs_fl%20a:contains(%22%5BPDF%5D%22)').attr(%22href%22);var%20bibtex_url=cit_el.find('.gs_fl%20a:contains(%22BibTeX%22)').attr(%22href%22);$.get(bibtex_url,function(a)%7Bvar%20b=document.createElement(%22form%22);b.setAttribute(%22method%22,%22post%22);b.setAttribute(%22action%22,%22http://stormy-leaf-9036.herokuapp.com/citations/%22);var%20c=%7Bbibtex:a,token:%22<%= current_user.authentication_token %>%22%7D;for(var%20d%20in%20c)%7Bif(c.hasOwnProperty(d))%7Bvar%20e=document.createElement(%22input%22);e.setAttribute(%22type%22,%22hidden%22);e.setAttribute(%22name%22,d);e.setAttribute(%22value%22,c%5Bd%5D);b.appendChild(e)%7D%7Ddocument.body.appendChild(b);b.submit()%7D)%7D);">Import citation</a></p>
+
+<h3>Mendeley</h3>
 
 <p><% if current_user.mendeley_token.nil? %>
   <%= link_to "Connect to Mendeley", '/users/auth/mendeley' %>
