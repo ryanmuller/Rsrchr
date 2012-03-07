@@ -3,7 +3,7 @@ $(document).ready ->
 
   $('.dropdown-toggle + ul a').click(() ->
     $('.hide').hide()
-    $('#new_posting_for_'+$(this).data('group-id')).parent().show()
+    $(this).parent().parent().parent().next('.postings').find('#new_posting_for_'+$(this).data('group-id')).parent().show()
   )
 
   $('.share .cancel').click(() ->

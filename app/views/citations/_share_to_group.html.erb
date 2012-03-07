@@ -12,6 +12,7 @@
   </ul>
 </div>
 
+<div class="postings">
 <% current_user.groups.each do |g| %>
   <div class="well hide share">
   <%= form_for [g, g.postings.build], :html => { :id => "new_posting_for_#{g.id}", :class => 'form-horizontal' } do |f| %>
@@ -38,4 +39,5 @@
   <% end %>
   </div>
 <% end %>
+</div>
 
