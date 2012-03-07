@@ -27,7 +27,9 @@ Rsrchr::Application.routes.draw do
   resources :ref_links, :only => :create
 
   resources :authors, :only => :show
-  resources :users, :only => :show
+  resources :users, :only => :show do
+    resources :user_citations, :only => :index
+  end
   resources :groups do
     resources :postings, :only => :create
   end
