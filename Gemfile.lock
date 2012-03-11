@@ -206,6 +206,7 @@ DEPENDENCIES
   factory_girl
   jquery-rails
   launchy
+  nokogiri
   omniauth
   omniauth-mendeley
   pg

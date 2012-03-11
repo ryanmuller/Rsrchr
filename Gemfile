@@ -13,6 +13,7 @@ gem 'omniauth'
 gem 'omniauth-mendeley'
 gem 'bibtex-ruby'
 gem 'rails3-jquery-autocomplete'
+gem 'nokogiri'
 
 
 # Gems used only for assets and not required
