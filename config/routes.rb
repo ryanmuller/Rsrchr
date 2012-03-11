@@ -21,6 +21,7 @@ Rsrchr::Application.routes.draw do
   resources :citations do
     resources :tags, :only => :create
     get :autocomplete_citation_title, :on => :collection
+    resources :ref_links, :only => :show
   end
 
   resources :pdfhashes

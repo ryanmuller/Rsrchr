@@ -1,5 +1,16 @@
 class RefLinksController < ApplicationController
-  before_filter :authenticate_user
+  before_filter :authenticate_user, :only => :create
+
+  def show
+    @citation = Citation.find(params[:citation_id])
+    @ref_link = RefLink.find(params[:id])
+
+    require 'nokogiri'
+    require 'open-uri' 
+
+    doc = Nokogiri::HTML(open(@ref_link.url))
+    @summary = doc.xpath("//div[contains(@class, \"notes:#{@citation.citekey}\")]").first.to_s.html_safe
+  end
 
   def create
     @ref_link = RefLink.new(params[:ref_link])
